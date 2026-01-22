@@ -1,0 +1,80 @@
+﻿@model MiCompraViewModel
+
+@{
+    ViewData["Title"] = "NuestraTienda";
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+}
+
+<h1 class="card-title bg-light shadow rounded-3 mb-5 p-5 text-center text-dark bg-texture-dots">Elegi tus productos</h1>
+
+<form asp-controller="CarritoItem" asp-action="MiCompra">
+    <div class="row g-lg-3">
+
+        @for(int i = 0; i < Model.Productos.Count ; i++)
+        {
+                
+                var item = Model.Productos[i];
+
+                <div class="col-12 col-md-6">
+                <div class="card mb-3 shadow rounded-3 bg-body-secondary bg-texture-dots" style="max-width: 500px;">
+                    <div class="row g-0">
+                        <div class="ratio ratio-1x1">
+                            <img src="@Url.Content(item.URLImage)"
+                                 alt="@item.Nombre"
+                                 class="img-fluid rounded-start"
+                                 style="object-fit: contain; padding: 10px;">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+
+                        </div>
+                        <div class="card-footer">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.PrecioUnitario)
+                            </p>
+
+                            <div class="mb-3" style="max-width: 200px;">
+                                <label for="cantidadSelect" class="form-label fw-bold">Cantidad</label>
+                                <select class="form-select" id="cantidadSelect" name="ItemsElegidos[@i].Cantidad" aria-label="Seleccionar cantidad">
+                                    <option selected value="1">1 unidad</option>
+                                    <option value="2">2 unidades</option>
+                                    <option value="3">3 unidades</option>
+                                    <option value="4">4 unidades</option>
+                                    <option value="5">5 unidades</option>
+                                    <option value="6">6 unidades</option>
+                                    <option value="more">Más de 6 unidades</option>
+                                </select>
+                            </div>
+
+                            <input type="checkbox"
+                                   class="btn-check"
+                                   name="ItemsElegidos[@i].ProductoID"
+                                   value="@item.ProductoID"
+                                   id="btn-check-@item.ProductoID"
+                                   autocomplete="off">
+
+                            <label class="btn btn-outline-primary w-100" for="btn-check-@item.ProductoID">
+                                Agregar al Carrito
+                            </label>
+
+                            <a class="btn btn-primary w-100 me-1 mt-3" asp-action="Details" asp-route-id="@item.ProductoID">Ver Detalle</a> |
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        }
+        <button class="btn btn-primary me-1" type="submit" asp-controller="Carritoes" asp-action="MiCarrito">Ver mi carrito</button>
+</form>
+
+

@@ -1,0 +1,44 @@
+﻿@model TiendaNueva.Models.Carrito
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Carrito</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CarritoID" />
+            <div class="form-group">
+                <label asp-for="UsuarioID" class="control-label"></label>
+                <input asp-for="UsuarioID" class="form-control" />
+                <span asp-validation-for="UsuarioID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioFinal" class="control-label"></label>
+                <input asp-for="PrecioFinal" class="form-control" />
+                <span asp-validation-for="PrecioFinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoCarrito" class="control-label"></label>
+                <select asp-for="EstadoCarrito" class="form-control"></select>
+                <span asp-validation-for="EstadoCarrito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

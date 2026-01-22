@@ -1,0 +1,51 @@
+﻿@model Carrito;
+@{
+    ViewData["Title"] = "MiCarrito";
+}
+
+<h1>Mi Carrito</h1>
+
+
+<table class="table table-info">
+    <thead>
+        <tr>
+
+            <th>
+                Producto
+            </th>
+
+            <th>
+                Cantidad
+            </th>
+
+            <th>
+                Precio
+            </th>
+
+        </tr>
+    </thead>
+    @foreach (var item in Model.Productos)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioFinalPorProducto)
+                </td>
+       
+                <td>
+                    <a asp-action="Details" class="btn btn-primary"asp-route-id="@item.CarritoItemID">Details</a> |
+                </td>
+        </tbody>
+
+    }
+
+    <tfoot>
+        
+    </tfoot>
+</table>
