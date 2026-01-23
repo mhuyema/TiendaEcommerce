@@ -8,15 +8,27 @@
 
 <h1 class="card-title bg-light shadow rounded-3 mb-5 p-5 text-center text-dark bg-texture-dots">Elegi tus productos</h1>
 
+<div class="card">
+    <div class="card-body mb-4">
+        <p>
+            <form asp-controller="Producto" asp-action="NuestraTienda" method="get">
+                <input type="text" class="form-control" name="Filtro" placeholder="Busca un producto" />
+                <button type="submit" class="btn btn-outline-light text-dark">Buscar</button>
+            </form>
+        </p>
+
+    </div>
+</div>
+
 <form asp-controller="CarritoItem" asp-action="MiCompra">
     <div class="row g-lg-3">
 
-        @for(int i = 0; i < Model.Productos.Count ; i++)
+        @for (int i = 0; i < Model.Productos.Count; i++)
         {
-                
-                var item = Model.Productos[i];
 
-                <div class="col-12 col-md-6">
+            var item = Model.Productos[i];
+
+            <div class="col-12 col-md-6">
                 <div class="card mb-3 shadow rounded-3 bg-body-secondary bg-texture-dots" style="max-width: 500px;">
                     <div class="row g-0">
                         <div class="ratio ratio-1x1">

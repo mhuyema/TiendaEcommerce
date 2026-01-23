@@ -3,10 +3,10 @@
     ViewData["Title"] = "MiCarrito";
 }
 
-<h1>Mi Carrito</h1>
+<h1 class="bg-texture-tarjeta text-dark">Mi Carrito</h1>
 
 
-<table class="table table-info">
+<table class="table table-info rounded-3 shadow mb-3">
     <thead>
         <tr>
 
@@ -21,7 +21,10 @@
             <th>
                 Precio
             </th>
-
+            <th>
+                Imagen
+            </th>
+            <th></th>
         </tr>
     </thead>
     @foreach (var item in Model.Productos)
@@ -35,17 +38,24 @@
                     @Html.DisplayFor(modelItem => item.Cantidad)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PrecioFinalPorProducto)
+                    @item.PrecioFinalPorProducto.ToString("C")
+                    
                 </td>
-       
                 <td>
-                    <a asp-action="Details" class="btn btn-primary"asp-route-id="@item.CarritoItemID">Details</a> |
+                    <img src="@Url.Content(item.Item.URLImage)"
+                         alt="@item.Item.Nombre"
+                         class="img-fluid rounded-start"
+                         style="width: 100px; height: auto;">
+                </td>
+                <td>
+                    <a asp-controller="Producto" asp-action="Details" class="btn btn-info p-2" asp-route-id="@item.Item.ProductoID">Ver Producto</a> |
                 </td>
         </tbody>
 
     }
 
-    <tfoot>
-        
-    </tfoot>
 </table>
+
+<label class="col-form-label text-dark">Precio Final</label>
+<h3 class="card-title bg-texture-tarjeta text-dark shadow-lg">@Model.PrecioFinal.ToString("C")</h3>
+<a class="btn btn-primary mt-3 p-2 shadow" asp-controller="Home" asp-action="Index"> Realizar Compra</a>

@@ -53,12 +53,16 @@ namespace TiendaNueva.Controllers
             return View();
         }
 
-        public async Task<IActionResult> NuestraTienda() 
+        public async Task<IActionResult> NuestraTienda()
         {
-            var dbContextTiendaNueva = _context.Productos.Take(6).Include(p => p.Categoria);
-            var ItemsTienda = new List<CarritoItem>();
-            var ModeloDeVistaNuestraTienda = new MiCompraViewModel();
-            ModeloDeVistaNuestraTienda.Productos = await dbContextTiendaNueva.ToListAsync();
+
+
+                var dbContextTiendaNueva = _context.Productos.Take(6).Include(p => p.Categoria);
+                var ItemsTienda = new List<CarritoItem>();
+                var ModeloDeVistaNuestraTienda = new MiCompraViewModel();
+                ModeloDeVistaNuestraTienda.Productos = await dbContextTiendaNueva.ToListAsync();
+           
+   
 
             return View(ModeloDeVistaNuestraTienda);
         }

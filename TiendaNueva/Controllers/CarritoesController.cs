@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -90,29 +91,31 @@ namespace TiendaNueva.Controllers
                 return BadRequest();
             }
             var itemsReales = MiCompra.ItemsElegidos.Where((item => item.ProductoID != Guid.Empty)).ToList();
-            Carrito carrito = new Carrito();
+            var ids = itemsReales.Select(i => i.ProductoID).ToList();
+            var productosDB = await _context.Productos.Where(p => ids.Contains(p.ProductoID)).ToListAsync();
+            Carrito carrito = new Carrito() { CarritoID = Guid.NewGuid() };
             List<CarritoItem> productos = new List<CarritoItem>();
-            carrito.Productos = productos;
-            foreach (var item in itemsReales)
+            foreach (var prod in productosDB)
             {
-                var producto = await _context.Productos.FindAsync(item.ProductoID);
-
-                if (producto != null)
+                var item = new CarritoItem() { CarritoID = Guid.NewGuid() };
+                item.Item = prod;
+                foreach (var it in itemsReales)
                 {
-                    item.Item = new Producto();
-                    item.Item.Nombre = producto.Nombre;
-                    item.Item.URLImage = producto.URLImage;
-                    item.Item.Descripcion = producto.Descripcion;
-                    item.Item.CategoriaId = producto.CategoriaId;
-                    item.Item.PrecioUnitario = producto.PrecioUnitario;
-                    item.CalcularPrecio();
-                    carrito.Productos.Add(item);
+                    if (it.ProductoID == prod.ProductoID)
+                    {
+                        item.Cantidad = it.Cantidad;
+                    }
                 }
-
+                item.CalcularPrecio();
+                productos.Add(item);
             }
 
-            carrito.CalcularPrecioFinal();
 
+            carrito.Productos = productos;
+
+
+            carrito.CalcularPrecioFinal();
+            carrito.EstadoCarrito = Estado.ACTIVO;
 
 
             return View(carrito);
