@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MiCompraViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,41 +9,121 @@
 
 
 <div class="text-center">
-    <h1 class="display-4 card-title p-3 bg-texture-tarjeta shadow">Bienvenido a Imove Argentina</h1>
+    <h1 class="display-4 card-title p-3 bg-light mb-3 shadow">
+        Bienvenido
+    </h1>
 
 </div>
-<div class="card">
-    <div class="card-body">
-        <p>
-            <form asp-controller="Producto" asp-action="NuestraTienda" method="get">
-                <input type="text" class="form-control" name="Filtro" placeholder="Busca un producto" />
-                <button type="submit" class="btn btn-outline-light text-dark">Buscar</button>
-            </form>
-        </p>
 
-    </div>
-</div>
+
 <div id="carouselExample" class="carousel slide">
     <div class="carousel-inner">
+
         <div class="carousel-item active">
-            <img src="..." class="d-block w-100" alt="...">
+            <video autoplay loop muted playsinline class="d-block w-100">
+                <source src="~/css/img/imghome/animacionimove2.mp4" type="video/mp4">
+            </video>
         </div>
-        <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+
+
+        <div class="carousel-item active">
+            <video autoplay loop muted playsinline class="d-block w-100">
+                <source src="~/css/img/imghome/comp%202.mp4" type="video/mp4">
+            </video>
         </div>
-        <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <h2 class="card card-title p-3 bg-light text-center mt-3 mb-3"> El mejor precio</h2>
+
+
+    <div class="card mb-3 mt-3">
+        <div class="card-body mb-4">
+            <p>
+                <form asp-controller="Producto" asp-action="NuestraTienda" method="get">
+                    <input type="text" class="form-control" name="Filtro" placeholder="Busca un producto" />
+                    <button type="submit" class="btn btn-outline-light text-dark">Buscar</button>
+                </form>
+            </p>
+
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+
+    <form asp-controller="CarritoItem" asp-action="MiCompra">
+        <div class="row g-lg-3">
+
+            @for (int i = 0; i < Model.Productos.Count; i++)
+            {
+
+                var item = Model.Productos[i];
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card mb-3 shadow rounded-3 bg-body-secondary bg-texture-dots" style="max-width: 500px;">
+                        <div class="row g-0">
+                            <div class="ratio ratio-1x1">
+                                <img src="@Url.Content(item.URLImage)"
+                                     alt="@item.Nombre"
+                                     class="img-fluid rounded-start"
+                                     style="object-fit: contain; padding: 10px;">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+
+                            </div>
+                            <div class="card-footer">
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.PrecioUnitario)
+                                </p>
+
+                                <div class="mb-3" style="max-width: 200px;">
+                                    <label for="cantidadSelect" class="form-label fw-bold">Cantidad</label>
+                                    <select class="form-select" id="cantidadSelect" name="ItemsElegidos[@i].Cantidad" aria-label="Seleccionar cantidad">
+                                        <option selected value="1">1 unidad</option>
+                                        <option value="2">2 unidades</option>
+                                        <option value="3">3 unidades</option>
+                                        <option value="4">4 unidades</option>
+                                        <option value="5">5 unidades</option>
+                                        <option value="6">6 unidades</option>
+                                        <option value="more">Más de 6 unidades</option>
+                                    </select>
+                                </div>
+
+                                <input type="checkbox"
+                                       class="btn-check"
+                                       name="ItemsElegidos[@i].ProductoID"
+                                       value="@item.ProductoID"
+                                       id="btn-check-@item.ProductoID"
+                                       autocomplete="off">
+
+                                <label class="btn btn-outline-primary w-100" for="btn-check-@item.ProductoID">
+                                    Agregar al Carrito
+                                </label>
+
+                                <a class="btn btn-primary w-100 me-1 mt-3" asp-action="Details" asp-route-id="@item.ProductoID">Ver Detalle</a> |
 
 
-<p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+
+            }
+            <button class="btn btn-primary me-1" type="submit" asp-controller="Carritoes" asp-action="MiCarrito">Ver mi carrito</button>
+    </form>
+
+            <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>

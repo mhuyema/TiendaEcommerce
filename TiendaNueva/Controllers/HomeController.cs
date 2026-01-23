@@ -1,14 +1,26 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using TiendaNueva.Data;
 using TiendaNueva.Models;
 
 namespace TiendaNueva.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly DbContextTiendaNueva _context;
+
+        public HomeController(DbContextTiendaNueva context)
         {
-            return View();
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var dbContextTiendaNueva = _context.Productos.Take(8).Include(p => p.Categoria);
+            var ItemsTienda = new List<CarritoItem>();
+            var ModeloDeVistaNuestraTienda = new MiCompraViewModel();
+            ModeloDeVistaNuestraTienda.Productos = await dbContextTiendaNueva.ToListAsync();
+            return View(ModeloDeVistaNuestraTienda);
         }
 
         public IActionResult Privacy()
