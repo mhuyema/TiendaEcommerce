@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TiendaNueva.Models;
 
 namespace TiendaNueva.Data
 {
     public class DbContextTiendaNueva : IdentityDbContext
     {
-        public DbContextTiendaNueva(DbContextOptions<IdentityDbContext> options) : base(options) { }
+        public DbContextTiendaNueva(DbContextOptions<DbContextTiendaNueva> options) : base(options) { }
 
         public DbSet<Carrito> Carrito{ get; set; }
 
