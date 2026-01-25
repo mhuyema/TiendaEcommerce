@@ -1,37 +1,37 @@
-🛒 E-Commerce App - TiendaNueva
-Este proyecto es una aplicación web de comercio electrónico desarrollada con ASP.NET Core MVC. La aplicación permite a los usuarios navegar por un catálogo de productos, seleccionar cantidades dinámicamente y gestionar un carrito de compras de manera eficiente antes de finalizar la compra.
+Entendido, nada de "vender humo". Vamos a bajarlo a tierra con datos técnicos concretos y realistas que describan exactamente lo que hiciste, sin adornos innecesarios. Un reclutador técnico valora mucho más la precisión que las palabras pomposas.
 
-🚀 Funcionalidades Principales
-Catálogo de Productos Dinámico: Visualización de productos con imágenes, descripciones y precios unitarios.
+Aquí tenés una versión directa, técnica y honesta:
 
-Selección Inteligente: Formulario dinámico que permite elegir la cantidad de cada producto mediante un sistema de índices enlazados (Model Binding).
+🛒 iMove E-Commerce - .NET 9 MVC
+iMove es una aplicación web de comercio electrónico desarrollada como proyecto personal para aplicar conceptos avanzados de ASP.NET Core MVC. El foco principal fue la implementación de un sistema de seguridad robusto y la gestión lógica del ciclo de vida de una compra.
 
-Gestión de Carrito: * Filtrado automático de ítems no seleccionados mediante LINQ.
+🚀 Funcionalidades Implementadas
+Autenticación y Autorización (Identity): Uso de IdentityUser e IdentityRole para diferenciar permisos entre administradores y clientes.
 
-Cálculo automático de subtotales y precio final.
+Gestión de Accesos: Control de visibilidad de elementos en la interfaz (Navbar) y protección de endpoints mediante el atributo [Authorize] según el rol del usuario.
 
-Persistencia de IDs mediante Guid para garantizar la integridad de los datos.
+Panel Administrativo: Interfaz funcional para que el administrador pueda editar productos y gestionar los permisos de otros usuarios.
 
-Arquitectura MVC: Separación clara de responsabilidades utilizando ViewModels para la transferencia de datos entre la vista y el controlador.
+Lógica de Carrito: Sistema de selección de productos con cálculo dinámico de totales y persistencia de datos mediante ViewModels y Guids.
 
-🛠️ Tecnologías Utilizadas
-Backend: C# con .NET 8/9.
+Arquitectura de Estados: Implementación del patrón de diseño State mediante la interfaz IEstado para controlar los flujos del carrito (Activo, Vendido, Abandonado).
 
-Framework Web: ASP.NET Core MVC.
+🛠️ Stack Técnico
+Framework: .NET 9 (MVC).
 
-Base de Datos: Entity Framework Core (SQL Server).
+ORM: Entity Framework Core (Code First) con SQL Server.
 
-Frontend: Razor Pages, HTML5, CSS3 y Bootstrap para el diseño responsivo.
+Seguridad: ASP.NET Core Identity.
 
-Lógica de Datos: LINQ para el filtrado de colecciones y manejo de objetos complejos.
+Frontend: Razor Views, HTML, CSS y Bootstrap.
 
-📋 Estructura del Proyecto (Lógica del Carrito)
-El corazón del sistema de compras reside en el CarritoItemController, donde implementamos una lógica robusta para procesar el formulario:
+Herramientas: LINQ para consultas y filtrado de datos.
 
-Recepción de Datos: El controlador recibe un MiCompraViewModel.
+📋 Estado del Proyecto y Roadmap
+El proyecto se encuentra en una etapa funcional de preventa. Los siguientes pasos técnicos son:
 
-Filtrado: Se limpian los objetos donde el ProductoID es igual a Guid.Empty.
+Integración de Mercado Pago SDK para el procesamiento de transacciones.
 
-Enriquecimiento: Se recuperan los datos reales de la base de datos (nombres, imágenes) para evitar datos corruptos o manipulados desde el cliente.
+Lógica de validación y descuento de Stock en la base de datos al confirmar el pago.
 
-Cálculo: Se ejecutan los métodos de negocio para obtener el total a pagar.
+Desarrollo del historial de pedidos vinculado al perfil del usuario.
