@@ -1,7 +1,3 @@
-Entendido, nada de "vender humo". Vamos a bajarlo a tierra con datos técnicos concretos y realistas que describan exactamente lo que hiciste, sin adornos innecesarios. Un reclutador técnico valora mucho más la precisión que las palabras pomposas.
-
-Aquí tenés una versión directa, técnica y honesta:
-
 🛒 iMove E-Commerce - .NET 9 MVC
 iMove es una aplicación web de comercio electrónico desarrollada como proyecto personal para aplicar conceptos avanzados de ASP.NET Core MVC. El foco principal fue la implementación de un sistema de seguridad robusto y la gestión lógica del ciclo de vida de una compra.
 
