@@ -1,0 +1,67 @@
+﻿@model List<UsuarioViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de usuarios</h1>
+
+<table class="table table-info rounded-2 shadow">
+    <thead>
+        <tr>
+
+
+
+
+
+            <th>
+                Email
+            </th>
+            <th>
+                Es Admin
+            </th>
+            <th>
+                Accion
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Email)
+                </td>
+                <td>
+                    @(item.EsAdmin ? "✅" : "🚫")
+                </td>
+                <td>
+
+                    <a asp-action="DarPermisoAdmin" asp-route-id="@item.Id" class="btn @(item.EsAdmin ? "btn-danger" : "btn-primary")">
+                        @(item.EsAdmin ? "Quitar Permiso" : "Dar Permiso")
+                        </a>
+                </td>
+            </tr>
+
+        }
+
+
+
+
+
+
+
+
+
+
+    </tbody>
+
+
+
+
+
+</table>

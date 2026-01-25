@@ -21,13 +21,13 @@ namespace TiendaNueva.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Producto
         public async Task<IActionResult> Index()
         {
             var dbContextTiendaNueva = _context.Productos.Include(p => p.Categoria);
             return View(await dbContextTiendaNueva.ToListAsync());
         }
-
         // GET: Producto/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -46,7 +46,7 @@ namespace TiendaNueva.Controllers
 
             return View(producto);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Producto/Create
         public IActionResult Create()
         {
@@ -73,6 +73,7 @@ namespace TiendaNueva.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("ProductoID,Nombre,Descripcion,URLImage,PrecioUnitario,CategoriaId")] Producto producto)
         {
             if (ModelState.IsValid)
@@ -87,6 +88,7 @@ namespace TiendaNueva.Controllers
         }
 
         // GET: Producto/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -108,6 +110,7 @@ namespace TiendaNueva.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Guid id, [Bind("ProductoID,Nombre,Descripcion,URLImage,PrecioUnitario,CategoriaId")] Producto producto)
         {
             if (id != producto.ProductoID)
@@ -138,7 +141,7 @@ namespace TiendaNueva.Controllers
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaName", producto.CategoriaId);
             return View(producto);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Producto/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -159,6 +162,7 @@ namespace TiendaNueva.Controllers
         }
 
         // POST: Producto/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
