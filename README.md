@@ -1,6 +1,6 @@
 # 🛒 iMove E-Commerce - .NET 10 MVC
 
-![.NET 9.0](https://img.shields.io/badge/.NET-9.0-purple) ![Entity Framework Core](https://img.shields.io/badge/EF%20Core-Code%20First-blue) ![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
+![.NET 9.0](https://img.shields.io/badge/.NET-10.0-purple) ![Entity Framework Core](https://img.shields.io/badge/EF%20Core-Code%20First-blue) ![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
 
 > **Proyecto personal Full Stack** desarrollado para aplicar patrones de arquitectura modernos, seguridad con Identity y lógica de negocio compleja en ASP.NET Core.
 
