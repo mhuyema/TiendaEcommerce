@@ -72,7 +72,7 @@ El proyecto se encuentra en desarrollo activo. Las próximas implementaciones pl
 Para clonar y ejecutar este proyecto en tu entorno local:
 
 1.  **Requisitos:**
-    * .NET SDK 9.0 instalado.
+    * .NET SDK 10.0 instalado.
     * SQL Server (LocalDB o Express).
 
 2.  **Clonar el repositorio:**
@@ -104,7 +104,6 @@ Para clonar y ejecutar este proyecto en tu entorno local:
 
 **Matías Huyema**
 * **Rol:** .NET Developer | Multimedia Designer
-* **LinkedIn:** [Tu Link Aquí]
-* **Portfolio:** [Tu Link Aquí]
+
 
 ---
