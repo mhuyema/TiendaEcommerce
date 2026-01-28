@@ -22,7 +22,7 @@ Actualmente, el proyecto sirve como demostración de habilidades en **.NET 9**, 
 ## 🛠️ Tech Stack
 
 ### Backend & Datos
-* **Framework:** .NET 9 (ASP.NET Core MVC).
+* **Framework:** .NET 10 (ASP.NET Core MVC).
 * **ORM:** Entity Framework Core (Enfoque *Code First*).
 * **Base de Datos:** SQL Server.
 * **Seguridad:** ASP.NET Core Identity.
